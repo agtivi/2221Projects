@@ -1,0 +1,57 @@
+1.
+    private static void generateElements(String str, Set<Character> charSet) {
+        if (str.length() > 0) {
+            charSet.clear();
+            char input;
+            for (int i = 0; i < str.length(); i++) {
+                input = str.charAt(i);
+                charSet.add(input);
+            }
+        }
+    }
+2.
+    private static String nextWordOrSeparator(String text, int position,
+            Set<Character> separators) {
+        boolean isSeparator = false;
+        for (Character s : separators) {
+            if (text.charAt(position) == s) {
+                isSeparator = true;
+            }
+        }
+        String solution = text.substring(position, text.length());
+        int index = position;
+        if (!isSeparator) {
+            for (int i = position; i < solution.length(); i++) {
+                for (Character s : separators) {
+                    if (text.charAt(position) != s) {
+                        isSeparator = false;
+                    } else {
+                        isSeparator = true;
+                    }
+                }
+                if (!isSeparator) {
+                    solution = solution + text.charAt(position);
+                    index = index + 1;
+                } else {
+                    i = solution.length();
+                }
+            }
+        } else {
+            for (int i = position; i < solution.length(); i++) {
+                for (Character s : separators) {
+                    if (text.charAt(position) != s) {
+                        isSeparator = false;
+                    } else {
+                        isSeparator = true;
+                    }
+                }
+                if (isSeparator) {
+                    solution = solution + text.charAt(position);
+                    index = index + 1;
+                } else {
+                    i = solution.length();
+                }
+            }
+        }
+        return solution;
+    }

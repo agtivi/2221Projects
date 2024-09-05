@@ -1,0 +1,46 @@
+    /**
+     * Reverses ("flips") {@code this}.
+     *
+     * @updates this
+     * @ensures this = rev(#this)
+     */
+    public void flipStack() {
+        /*
+         * I'm confused about the object type, do we need to include T inbetween
+         * the "<>" or do we just need the "<>" by itself?
+         */
+        Stack<T> flipped = new Stack1L<T>();
+        while (this.size() > 0) {
+            flipped.push(this.pop());
+        }
+        this.transferFrom(flipped);
+    }
+
+    /**
+     * Reverses ("flips") {@code this}.
+     *
+     * @updates this
+     * @ensures this = rev(#this)
+     */
+    public void flipSequenceLoop() {
+        Sequence<T> flipped = new Sequence1L<T>();
+        while (this.size() > 0) {
+            flipped.add(flipped.size(), this.remove());
+        }
+        this.transferFrom(flipped);
+    }
+
+    /**
+     * Reverses ("flips") {@code this}.
+     *
+     * @updates this
+     * @ensures this = rev(#this)
+     */
+    public void flipSequenceRecursion() {
+        Sequence<T> flipped = new Sequence1L<T>();
+        if (this.size() > 1) {
+            flipped = this.remove();
+            this.flipSequenceRecursion();
+            this.add(this.size(), flipped);
+        }
+    }
